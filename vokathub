@@ -7,6 +7,80 @@ pcall(function()
     setclipboard("https://discord.gg/qRFZs95XYz")
 end)
 
+pcall(function()
+    local CoreGui = game:GetService("CoreGui")
+    local TweenService = game:GetService("TweenService")
+
+    local screenGui = Instance.new("ScreenGui")
+    screenGui.Name = "ad"
+    screenGui.ResetOnSpawn = false
+    screenGui.IgnoreGuiInset = true
+    screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+    screenGui.Parent = CoreGui
+
+    local frame = Instance.new("Frame")
+    frame.Size = UDim2.new(0, 380, 0, 120)
+    frame.Position = UDim2.new(0.5, 0, 0.5, 0)
+    frame.AnchorPoint = Vector2.new(0.5, 0.5)
+    frame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+    frame.BorderSizePixel = 0
+    frame.BackgroundTransparency = 1
+    frame.Parent = screenGui
+
+    Instance.new("UICorner", frame).CornerRadius = UDim.new(0, 10)
+
+    local title = Instance.new("TextLabel")
+    title.Text = "Join our Discord"
+    title.Font = Enum.Font.GothamBold
+    title.TextColor3 = Color3.fromRGB(255, 255, 255)
+    title.TextSize = 20
+    title.BackgroundTransparency = 1
+    title.Size = UDim2.new(1, 0, 0, 30)
+    title.Position = UDim2.new(0, 0, 0, 10)
+    title.Parent = frame
+
+    local label = Instance.new("TextLabel")
+    label.Text = "discord.gg/qRFZs95XYz"
+    label.Font = Enum.Font.Gotham
+    label.TextColor3 = Color3.fromRGB(200, 200, 200)
+    label.TextSize = 18
+    label.BackgroundTransparency = 1
+    label.Size = UDim2.new(1, 0, 0, 30)
+    label.Position = UDim2.new(0, 0, 0, 45)
+    label.Parent = frame
+
+    local copyButton = Instance.new("TextButton")
+    copyButton.Text = "Copy"
+    copyButton.Font = Enum.Font.GothamSemibold
+    copyButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    copyButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+    copyButton.Size = UDim2.new(0, 100, 0, 30)
+    copyButton.Position = UDim2.new(0.5, -50, 0, 80)
+    copyButton.Parent = frame
+    Instance.new("UICorner", copyButton).CornerRadius = UDim.new(0, 6)
+
+    copyButton.MouseButton1Click:Connect(function()
+        pcall(function()
+            setclipboard("https://discord.gg/qRFZs95XYz")
+        end)
+        copyButton.Text = "Copied!"
+        task.wait(1)
+        copyButton.Text = "Copy"
+    end)
+
+    
+    TweenService:Create(frame, TweenInfo.new(0.4), {BackgroundTransparency = 0}):Play()
+
+    
+    task.delay(5, function()
+        TweenService:Create(frame, TweenInfo.new(0.4), {BackgroundTransparency = 1}):Play()
+        task.wait(0.5)
+        if screenGui then
+            screenGui:Destroy()
+        end
+    end)
+end)
+
 local gameID = game.GameId
 local scriptURL = scriptByGameID[gameID]
 
@@ -22,4 +96,4 @@ else
             Duration = 10
         })
     end)
-      end
+end
