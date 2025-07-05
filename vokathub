@@ -1,0 +1,25 @@
+local scriptByGameID = {
+    [2668101271] = "https://raw.githubusercontent.com/vokamc/Flingthingsandpeople/refs/heads/main/Source",
+    [7709344486] = "https://raw.githubusercontent.com/vokamc/Stealabrainrot/refs/heads/main/Source",
+}
+
+pcall(function()
+    setclipboard("https://discord.gg/qRFZs95XYz")
+end)
+
+local gameID = game.GameId
+local scriptURL = scriptByGameID[gameID]
+
+if scriptURL then
+    pcall(function()
+        loadstring(game:HttpGet(scriptURL))()
+    end)
+else
+    pcall(function()
+        game:GetService("StarterGui"):SetCore("SendNotification", {
+            Title = "Notification",
+            Text = "This game is not supported yet",
+            Duration = 10
+        })
+    end)
+      end
